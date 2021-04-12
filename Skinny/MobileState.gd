@@ -1,14 +1,14 @@
-extends "StateBase.gd"
+extends "AbleToShootState.gd"
 
 	
 func handle_input(event=null):
 	
-		
+	.handle_input(event)
+	
 	if Input.is_action_pressed("ui_up"):
 		
 		owner.direction += Vector2(0, -1)
 		
-	
 	if Input.is_action_pressed("ui_down"):
 		
 		owner.direction += Vector2(0, 1)
@@ -21,5 +21,3 @@ func handle_input(event=null):
 		
 		owner.direction += Vector2(-1, 0)
 			
-	
-	

@@ -10,3 +10,7 @@ func _ready():
 	
 
 
+
+
+func _on_StateManager_shoot_hook(mouse_pos):
+	pass # Replace with function body.

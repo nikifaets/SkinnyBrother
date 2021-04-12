@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Skinny/Skinny.gd" type="Script" id=1]
 [ext_resource path="res://Art/ROLLING_STONE_GUNS_AGNEW.jpg" type="Texture" id=2]
 [ext_resource path="res://Skinny/StateManager.gd" type="Script" id=3]
 [ext_resource path="res://Skinny/Move.gd" type="Script" id=4]
 [ext_resource path="res://Skinny/Idle.gd" type="Script" id=5]
+[ext_resource path="res://Skinny/FlyToHook.gd" type="Script" id=6]
+[ext_resource path="res://Skinny/Cooldown.gd" type="Script" id=7]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -28,8 +30,20 @@ script = ExtResource( 3 )
 script = ExtResource( 4 )
 
 [node name="FlyToHook" type="Node" parent="StateManager"]
+script = ExtResource( 6 )
 
 [node name="Idle" type="Node" parent="StateManager"]
 script = ExtResource( 5 )
+
+[node name="Hook" type="Node2D" parent="."]
+
+[node name="Cooldown" type="Timer" parent="Hook"]
+wait_time = 0.001
+one_shot = true
+autostart = true
+script = ExtResource( 7 )
+[connection signal="shoot_hook" from="StateManager" to="Hook/Cooldown" method="_on_StateManager_shoot_hook"]
+[connection signal="shoot_hook" from="StateManager" to="." method="_on_StateManager_shoot_hook"]
+[connection signal="shoot_main" from="StateManager" to="StateManager" method="_on_StateManager_shoot_main"]
 [connection signal="move_stop" from="StateManager/Move" to="StateManager" method="_on_Move_move_stop"]
 [connection signal="idle_move" from="StateManager/Idle" to="StateManager" method="_on_Idle_idle_move"]

@@ -16,7 +16,7 @@ func exit():
 	
 	print("exit idle")
 	
-func enter():
+func enter(args=null):
 	
 	print("enter idle")
 	
