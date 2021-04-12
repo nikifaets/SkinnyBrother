@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Skinny/Skinny.gd" type="Script" id=1]
 [ext_resource path="res://Art/ROLLING_STONE_GUNS_AGNEW.jpg" type="Texture" id=2]
+[ext_resource path="res://Skinny/StateManager.gd" type="Script" id=3]
+[ext_resource path="res://Skinny/Move.gd" type="Script" id=4]
+[ext_resource path="res://Skinny/Idle.gd" type="Script" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -17,3 +20,16 @@ shape = SubResource( 1 )
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.011, 0.011 )
 texture = ExtResource( 2 )
+
+[node name="StateManager" type="Node" parent="."]
+script = ExtResource( 3 )
+
+[node name="Move" type="Node" parent="StateManager"]
+script = ExtResource( 4 )
+
+[node name="FlyToHook" type="Node" parent="StateManager"]
+
+[node name="Idle" type="Node" parent="StateManager"]
+script = ExtResource( 5 )
+[connection signal="move_stop" from="StateManager/Move" to="StateManager" method="_on_Move_move_stop"]
+[connection signal="idle_move" from="StateManager/Idle" to="StateManager" method="_on_Idle_idle_move"]
