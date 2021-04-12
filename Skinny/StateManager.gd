@@ -31,6 +31,9 @@ func _input(event):
 
 func change_state(new_state, args=null):
 	
+	if states[new_state] == current_state:
+		return
+		
 	current_state.exit()
 	current_state = states[new_state]
 	current_state.enter(args)
@@ -52,4 +55,10 @@ func _on_StateManager_shoot_main(mouse_pos):
 
 func _on_StateManager_shoot_hook(mouse_pos):
 	
+	print("shoot hook signal")
 	change_state("fly_to_hook", {"mouse_pos" : mouse_pos})
+
+
+func _on_FlyToHook_target_reached():
+	
+	change_state("idle")

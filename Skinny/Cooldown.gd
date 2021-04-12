@@ -14,6 +14,6 @@ func _ready():
 
 func _on_StateManager_shoot_hook(mouse_pos):
 	
-	set_wait_time(cooldown)
+	set_wait_time(.1)
 	print("start timer")
 	start()

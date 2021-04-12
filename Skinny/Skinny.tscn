@@ -42,8 +42,10 @@ wait_time = 0.001
 one_shot = true
 autostart = true
 script = ExtResource( 7 )
+cooldown = 1
 [connection signal="shoot_hook" from="StateManager" to="Hook/Cooldown" method="_on_StateManager_shoot_hook"]
-[connection signal="shoot_hook" from="StateManager" to="." method="_on_StateManager_shoot_hook"]
+[connection signal="shoot_hook" from="StateManager" to="StateManager" method="_on_StateManager_shoot_hook"]
 [connection signal="shoot_main" from="StateManager" to="StateManager" method="_on_StateManager_shoot_main"]
 [connection signal="move_stop" from="StateManager/Move" to="StateManager" method="_on_Move_move_stop"]
+[connection signal="target_reached" from="StateManager/FlyToHook" to="StateManager" method="_on_FlyToHook_target_reached"]
 [connection signal="idle_move" from="StateManager/Idle" to="StateManager" method="_on_Idle_idle_move"]

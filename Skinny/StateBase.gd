@@ -10,3 +10,6 @@ func update():
 func handle_input(event=null):
 	pass
 	
+func exit():
+	pass
+	
