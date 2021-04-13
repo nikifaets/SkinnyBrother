@@ -14,11 +14,13 @@ func update():
 	
 func exit():
 	
-	print("exit idle")
+	#print("exit idle")
+	pass
 	
 func enter(args=null):
 	
-	print("enter idle")
+	pass
+	#print("enter idle")
 	
 	
 

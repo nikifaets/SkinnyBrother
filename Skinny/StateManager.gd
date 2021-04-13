@@ -53,12 +53,12 @@ func _on_StateManager_shoot_main(mouse_pos):
 	print("shoot at ", mouse_pos)
 
 
-func _on_StateManager_shoot_hook(mouse_pos):
-	
-	print("shoot hook signal")
-	change_state("fly_to_hook", {"mouse_pos" : mouse_pos})
-
-
 func _on_FlyToHook_target_reached():
 	
 	change_state("idle")
+
+
+func _on_HookMissile_hook_landed(target):
+	
+	#print("hook landed")
+	change_state("fly_to_hook", {"target" : target})

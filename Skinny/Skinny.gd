@@ -9,8 +9,5 @@ func _ready():
 	pass # Replace with function body.
 	
 
-
-
-
 func _on_StateManager_shoot_hook(mouse_pos):
 	pass # Replace with function body.

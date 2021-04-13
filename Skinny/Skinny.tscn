@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Skinny/Skinny.gd" type="Script" id=1]
 [ext_resource path="res://Art/ROLLING_STONE_GUNS_AGNEW.jpg" type="Texture" id=2]
@@ -7,8 +7,13 @@
 [ext_resource path="res://Skinny/Idle.gd" type="Script" id=5]
 [ext_resource path="res://Skinny/FlyToHook.gd" type="Script" id=6]
 [ext_resource path="res://Skinny/Cooldown.gd" type="Script" id=7]
+[ext_resource path="res://Skinny/Hook.gd" type="Script" id=8]
+[ext_resource path="res://Art/carrot.png" type="Texture" id=9]
+[ext_resource path="res://Skinny/HookMissile.gd" type="Script" id=10]
 
 [sub_resource type="CircleShape2D" id=1]
+
+[sub_resource type="CapsuleShape2D" id=2]
 
 [node name="Skinny" type="KinematicBody2D"]
 position = Vector2( 428.857, 309.45 )
@@ -36,6 +41,7 @@ script = ExtResource( 6 )
 script = ExtResource( 5 )
 
 [node name="Hook" type="Node2D" parent="."]
+script = ExtResource( 8 )
 
 [node name="Cooldown" type="Timer" parent="Hook"]
 wait_time = 0.001
@@ -43,9 +49,30 @@ one_shot = true
 autostart = true
 script = ExtResource( 7 )
 cooldown = 1
+
+[node name="HookMissile" type="KinematicBody2D" parent="Hook"]
+visible = false
+position = Vector2( 14.592, -7.85722 )
+scale = Vector2( 0.268035, 0.268035 )
+collision_layer = 4
+collision_mask = 0
+script = ExtResource( 10 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hook/HookMissile"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Hook/HookMissile"]
+position = Vector2( -2.02081, -2.02051 )
+rotation = -0.832592
+scale = Vector2( 0.0357673, 0.0357673 )
+texture = ExtResource( 9 )
+[connection signal="shoot_hook" from="StateManager" to="Hook" method="_on_StateManager_shoot_hook"]
 [connection signal="shoot_hook" from="StateManager" to="Hook/Cooldown" method="_on_StateManager_shoot_hook"]
 [connection signal="shoot_hook" from="StateManager" to="StateManager" method="_on_StateManager_shoot_hook"]
 [connection signal="shoot_main" from="StateManager" to="StateManager" method="_on_StateManager_shoot_main"]
 [connection signal="move_stop" from="StateManager/Move" to="StateManager" method="_on_Move_move_stop"]
 [connection signal="target_reached" from="StateManager/FlyToHook" to="StateManager" method="_on_FlyToHook_target_reached"]
+[connection signal="target_reached" from="StateManager/FlyToHook" to="Hook/HookMissile" method="_on_FlyToHook_target_reached"]
 [connection signal="idle_move" from="StateManager/Idle" to="StateManager" method="_on_Idle_idle_move"]
+[connection signal="hook_landed" from="Hook/HookMissile" to="Hook" method="_on_HookMissile_hook_landed"]
+[connection signal="hook_landed" from="Hook/HookMissile" to="StateManager" method="_on_HookMissile_hook_landed"]

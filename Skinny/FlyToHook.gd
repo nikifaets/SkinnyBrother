@@ -10,7 +10,7 @@ var direction
 func enter(args=null):
 	
 	print("enter hook fly")
-	var mouse_pos = args["mouse_pos"]
+	var mouse_pos = args["target"]
 	print(target)
 	target = mouse_pos
 	direction = (target - owner.position).normalized()
